@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import getCategories, { getSubCategories } from "@/lib/fetchers/categories";
 import getBrands from "@/lib/fetchers/brands";
 import { getProductsByCategory } from "@/lib/fetchers/products";
+import Footer from "@/components/Layout/Footer";
 
 
 // do not cache this page
@@ -37,7 +38,9 @@ export default async function RootLayout({
       <body>
         <SupabaseProvider>
           <Header categories={categories} subCategories={subCategories} brands={brands} />
-          {children}</SupabaseProvider>
+          {children}
+          <Footer />
+        </SupabaseProvider>
       </body>
     </html>
   );

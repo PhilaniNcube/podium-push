@@ -1,5 +1,6 @@
 import ApparelBanner from "@/components/Banners/ApparelBanner";
 import HomePage from "@/components/Banners/HomePage";
+import Newsletter from "@/components/Leads/Newsletter";
 import Computers from "@/components/Products/Computers";
 import FeaturedGrid from "@/components/Products/FeaturedGrid";
 import HomepageProductGrid from "@/components/Products/HomepageProductGrid";
@@ -40,6 +41,7 @@ const page = async () => {
       {/* @ts-expect-error Async Server Component */}
       <HomepageProductGrid />
       <ExtraServices />
+      <Newsletter />
     </main>
   );
 };
