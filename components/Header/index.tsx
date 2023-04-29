@@ -136,7 +136,7 @@ const handleSearch = (e:React.FormEvent<HTMLFormElement>) => {
                     {subCategories.map((subCategory) => (
                       <MenubarItem key={subCategory.id}>
                         <Link
-                          href={`/categories/${subCategory.parent.slug}/${subCategory.slug}`}
+                          href={`/categories/${subCategory.parent.slug}?sub_category=${subCategory.slug}&page=1`}
                         >
                           {subCategory.name}
                         </Link>

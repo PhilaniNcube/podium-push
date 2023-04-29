@@ -19,84 +19,84 @@ export interface Database {
       admins: {
         Row: {
           id: string
-          created_at: string | null
-          user_id: string | null
+          created_at: string
+          user_id: string
         }
         Insert: {
           id?: string
-          created_at?: string | null
-          user_id?: string | null
+          created_at?: string
+          user_id?: string
         }
         Update: {
           id?: string
-          created_at?: string | null
-          user_id?: string | null
+          created_at?: string
+          user_id?: string
         }
       }
       brands: {
         Row: {
-          name: string | null
-          slug: string | null
-          image: ImageType | null
+          name: string
+          slug: string
+          image: ImageType
           id: string
-          created_at: string | null
+          created_at: string
         }
         Insert: {
-          name?: string | null
-          slug?: string | null
+          name?: string
+          slug?: string
           image?: ImageType
           id?: string
-          created_at?: string | null
+          created_at?: string
         }
         Update: {
-          name?: string | null
-          slug?: string | null
+          name?: string
+          slug?: string
           image?: ImageType
           id?: string
-          created_at?: string | null
+          created_at?: string
         }
       }
       categories: {
         Row: {
-          name: string | null
-          slug: string | null
-          image: ImageType | null
+          name: string
+          slug: string
+          image: ImageType
           id: string
-          created_at: string | null
+          created_at: string
         }
         Insert: {
-          name?: string | null
-          slug?: string | null
+          name?: string
+          slug?: string
           image?: ImageType
           id?: string
-          created_at?: string | null
+          created_at?: string
         }
         Update: {
-          name?: string | null
-          slug?: string | null
+          name?: string
+          slug?: string
           image?: ImageType
           id?: string
-          created_at?: string | null
+          created_at?: string
         }
       }
       product_images: {
         Row: {
-          product_id: string | null
-          image_url: string | null
+          product_id: string
+          image_url: string
           id: string
-          created_at: string | null
+          created_at: string
         }
         Insert: {
-          product_id?: string | null
-          image_url?: string | null
+          product_id?: string
+          image_url?: string
           id?: string
-          created_at?: string | null
+          created_at?: string
         }
         Update: {
-          product_id?: string | null
-          image_url?: string | null
+          product_id?: string
+          image_url?: string
           id?: string
-          created_at?: string | null
+          created_at?: string
         }
       }
       products: {
@@ -124,145 +124,145 @@ export interface Database {
           product_code: string
         }
         Insert: {
-          brand?: string | null
-          category?: string | null
-          details?: Json | null
-          sub_category?: string | null
+          brand?: string
+          category?: string
+          details?: Json
+          sub_category?: string
           images?: ImageType[]
-          supplier?: string | null
+          supplier?: string
           id?: string
-          created_at?: string | null
-          name?: string | null
-          description?: string | null
-          slug?: string | null
-          refund_policy?: string | null
-          rating?: number | null
-          shipping?: number | null
-          price?: number | null
-          cost?: number | null
-          featured?: boolean | null
-          in_stock?: boolean | null
-          published?: boolean | null
-          warranty?: string | null
-          product_code?: string | null
+          created_at?: string
+          name?: string
+          description?: string
+          slug?: string
+          refund_policy?: string
+          rating?: number
+          shipping?: number
+          price?: number
+          cost?: number
+          featured?: boolean
+          in_stock?: boolean
+          published?: boolean
+          warranty?: string
+          product_code?: string
         }
         Update: {
-          brand?: string | null
-          category?: string | null
-          details?: Json | null
-          sub_category?: string | null
+          brand?: string
+          category?: string
+          details?: Json
+          sub_category?: string
           images?: ImageType[]
-          supplier?: string | null
+          supplier?: string
           id?: string
-          created_at?: string | null
-          name?: string | null
-          description?: string | null
-          slug?: string | null
-          refund_policy?: string | null
-          rating?: number | null
-          shipping?: number | null
-          price?: number | null
-          cost?: number | null
-          featured?: boolean | null
-          in_stock?: boolean | null
-          published?: boolean | null
-          warranty?: string | null
-          product_code?: string | null
+          created_at?: string
+          name?: string
+          description?: string
+          slug?: string
+          refund_policy?: string
+          rating?: number
+          shipping?: number
+          price?: number
+          cost?: number
+          featured?: boolean
+          in_stock?: boolean
+          published?: boolean
+          warranty?: string
+          product_code?: string
         }
       }
       profiles: {
         Row: {
           id: string
-          email: string | null
-          first_name: string | null
-          last_name: string | null
-          created_at: string | null
+          email: string
+          first_name: string
+          last_name: string
+          created_at: string
           role: Database["public"]["Tables"]["roles"]
-          image: string | null
-          address: Json | null
+          image: string
+          address: Json
         }
         Insert: {
           id: string
-          email?: string | null
-          first_name?: string | null
-          last_name?: string | null
-          created_at?: string | null
-          role?: string | null
-          image?: string | null
-          address?: Json | null
+          email?: string
+          first_name?: string
+          last_name?: string
+          created_at?: string
+          role?: string
+          image?: string
+          address?: Json
         }
         Update: {
           id?: string
-          email?: string | null
-          first_name?: string | null
-          last_name?: string | null
-          created_at?: string | null
-          role?: string | null
-          image?: string | null
-          address?: Json | null
+          email?: string
+          first_name?: string
+          last_name?: string
+          created_at?: string
+          role?: string
+          image?: string
+          address?: Json
         }
       }
       roles: {
         Row: {
-          role: string | null
+          role: string
           id: string
         }
         Insert: {
-          role?: string | null
+          role?: string
           id?: string
         }
         Update: {
-          role?: string | null
+          role?: string
           id?: string
         }
       }
       sub_category: {
         Row: {
-          name: string | null
-          slug: string | null
+          name: string
+          slug: string
           parent: Database['public']['Tables']['categories']['Row']
           id: string
-          created_at: string | null
+          created_at: string
         }
         Insert: {
-          name?: string | null
-          slug?: string | null
-          parent?: string | null
+          name?: string
+          slug?: string
+          parent?: string
           id?: string
-          created_at?: string | null
+          created_at?: string
         }
         Update: {
-          name?: string | null
-          slug?: string | null
-          parent?: string | null
+          name?: string
+          slug?: string
+          parent?: string
           id?: string
-          created_at?: string | null
+          created_at?: string
         }
       }
       supplier: {
         Row: {
           id: string
-          created_at: string | null
-          name: string | null
-          slug: string | null
-          contact: string | null
-          email: string | null
+          created_at: string
+          name: string
+          slug: string
+          contact: string
+          email: string
         }
         Insert: {
           id?: string
-          created_at?: string | null
-          name?: string | null
-          slug?: string | null
-          contact?: string | null
-          email?: string | null
+          created_at?: string
+          name?: string
+          slug?: string
+          contact?: string
+          email?: string
         }
         Update: {
           id?: string
-          created_at?: string | null
-          name?: string | null
-          slug?: string | null
-          contact?: string | null
-          email?: string | null
+          created_at?: string
+          name?: string
+          slug?: string
+          contact?: string
+          email?: string
         }
       }
     }

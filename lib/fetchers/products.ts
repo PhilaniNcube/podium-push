@@ -4,7 +4,7 @@ import supabaseClient from "../supabase-client"
 const getProducts = async (page=1) => {
 
   let start = (page - 1) * 16
-  let end = page * 16
+  let end = (page * 16) - 1
 
   const { data: products, error } = await supabaseClient.from('products').select('*, category(*), brand(*), sub_category(*), supplier(*)')
     .limit(16).range(start, end)
@@ -29,12 +29,18 @@ const getFeaturedProducts = async () => {
 }
 
 
-const getProductsByCategory = async (page: number, id:string) => {
+const getProductsByCategory = async (page: number, slug:string) => {
+
+  const {data, error: categoryError} = await supabaseClient.from("categories").select("id").eq("slug", slug).single()
+
+  console.log({categoryError, data})
 
   let start = (page - 1) * 5
-  let end = page * 5
+  let end = (page * 5) - 1
 
-  const { data: products, error } = await supabaseClient.from('products').select('*, category(*), brand(*), sub_category(*), supplier(*)').range(start, end).eq('category', id)
+  console.log({start, end})
+
+  const { data: products, error } = await supabaseClient.from('products').select('*, category(*), brand(*), sub_category(*), supplier(*)').eq('category', data?.id).range(start, end)
 
     if(error) {
       console.log(error)
@@ -61,8 +67,10 @@ const getProductsBySubCategory = async (page: number, sub_category:string) => {
   let start = (page - 1) * 16
   let end = page * 16
 
+  console.log({sub_category})
+
   const { data: products, error } = await supabaseClient.from('products').select('*, category(*), brand(*), sub_category(*), supplier(*)')
-    .limit(16).range(start, end).eq('sub_category', sub_category)
+    .range(start, end).eq('sub_category.slug', sub_category)
 
     if(error) {
       console.log(error)
