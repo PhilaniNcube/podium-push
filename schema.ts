@@ -103,7 +103,7 @@ export interface Database {
         Row: {
           brand: Database["public"]["Tables"]["brands"]["Row"]
           category: Database["public"]["Tables"]["categories"]["Row"]
-          details: Json | null
+          details: {key: string, value: string}[]
           sub_category: Database["public"]["Tables"]["sub_category"]["Row"]
           images: ImageType[]
           supplier: Database["public"]["Tables"]["supplier"]["Row"]

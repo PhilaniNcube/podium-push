@@ -13,7 +13,7 @@ const ProductListItem = ({product}:ProductListItemProps) => {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="border border-neutral-300 overflow-hidden group rounded-md mb-4 px-4 py-6 flex flex-col lg:flex-row lg:justify-between group-hover:bg-slate-200"
+      className="border border-neutral-300 overflow-hidden group rounded-md mb-4 px-4 py-6 flex flex-col lg:flex-row lg:justify-between group-hover:bg-slate-200 gap-4"
     >
       <Image
         src={product.images[0].url}

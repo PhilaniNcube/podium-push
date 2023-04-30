@@ -29,6 +29,8 @@ import {
 import { Database } from "@/schema";
 import { CarIcon, LogInIcon, MessageCircle, SearchIcon, SeparatorHorizontal, ShoppingBag, UserIcon, UserPlusIcon } from "lucide-react";
 import { Fragment } from "react";
+import { useAppSelector } from "@/store/store";
+import { totalCartItemSelector } from "@/store/features/cartSlice";
 
 type HeaderProps = {
   categories: Database['public']['Tables']['categories']['Row'][];
@@ -37,6 +39,8 @@ type HeaderProps = {
 }
 
 const Header = ({categories, subCategories, brands}:HeaderProps) => {
+
+  const totalItems = useAppSelector(totalCartItemSelector)
 
 const handleSearch = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -117,9 +121,17 @@ const handleSearch = (e:React.FormEvent<HTMLFormElement>) => {
                 <MessageCircle />
                 <p className="text-xs">Message</p>
               </Link>
-              <Link href="/cart" className="flex flex-col items-center">
+              <Link
+                href="/cart"
+                className="flex flex-col items-center relative"
+              >
                 <ShoppingBag />
                 <p className="text-xs">Cart</p>
+                {!!totalItems && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs flex items-center justify-center rounded-full px-1">
+                    {totalItems}
+                  </span>
+                )}
               </Link>
             </div>
           </div>

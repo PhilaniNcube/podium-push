@@ -15,7 +15,7 @@ const page = async () => {
    const featuredProductsData = getFeaturedProducts();
     const luggageData = getProductsByCategory(
       1,
-      "233faa3f-8fbb-4771-a9fa-f5879afe0cbf"
+      "luggage_and_bags"
     );
     const electronicsData = getProductsByCategoryCount(
       10,

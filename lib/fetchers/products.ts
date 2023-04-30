@@ -35,12 +35,12 @@ const getProductsByCategory = async (page: number, slug:string) => {
 
   console.log({categoryError, data})
 
-  let start = (page - 1) * 5
-  let end = (page * 5) - 1
+  let start = (page - 1) * 15
+  let end = (page * 15)
 
   console.log({start, end})
 
-  const { data: products, error } = await supabaseClient.from('products').select('*, category(*), brand(*), sub_category(*), supplier(*)').eq('category', data?.id).range(start, end)
+  const { data: products, error } = await supabaseClient.from('products').select('*, category(*), brand(*), sub_category(*), supplier(*)', ).eq('category', data?.id).range(start, end)
 
     if(error) {
       console.log(error)
@@ -64,8 +64,8 @@ const getProductsByCategoryCount = async (count: number, categoryId:string) => {
 
 const getProductsBySubCategory = async (page: number, sub_category:string) => {
 
-  let start = (page - 1) * 16
-  let end = page * 16
+  let start = (page - 1) * 15
+  let end = (page * 15)
 
   console.log({sub_category})
 
@@ -81,11 +81,11 @@ const getProductsBySubCategory = async (page: number, sub_category:string) => {
 
 const getProductsByBrand = async (page: number, brand:string) => {
 
-  let start = (page - 1) * 16
-  let end = page * 16
+  let start = (page - 1) * 15
+  let end = (page * 15)
 
   const { data: products, error } = await supabaseClient.from('products').select('*, category(*), brand(*), sub_category(*), supplier(*)')
-    .limit(16).range(start, end).eq('brand', brand)
+    .range(start, end).eq('brand', brand)
 
     if(error) {
       console.log(error)
@@ -106,4 +106,40 @@ const getProduct = async ( product:string) => {
   return data
 }
 
-export { getProducts, getProductsByCategory, getProductsBySubCategory, getProductsByBrand, getFeaturedProducts, getProduct, getProductsByCategoryCount}
+const getTotalProductsCount = async () => {
+
+    const { data, error } = await supabaseClient.from('products').select('id', {count: 'exact'})
+
+      if(error) {
+        console.log(error)
+        throw Error(error.message)
+      }
+    return data
+}
+
+const getCategoryProductsCount = async (categorySlug:string) => {
+
+   const {data: category, error: categoryError} = await supabaseClient.from("categories").select("id").eq("slug", categorySlug).single()
+
+    const { data, error } = await supabaseClient.from('products').select('id', {count: 'exact'}).eq('category', category?.id)
+
+      if(error) {
+        console.log(error)
+        throw Error(error.message)
+      }
+    return data.length
+}
+
+const getSimilarProducts = async (subCategoryId: string) => {
+
+  const { data, error } = await supabaseClient.from('products').select('*, category(*), brand(*), sub_category(*), supplier(*)').eq('sub_category', subCategoryId).limit(6)
+
+    if(error) {
+      console.log(error)
+      throw Error(error.message)
+    }
+  return data
+
+}
+
+export { getProducts, getProductsByCategory, getProductsBySubCategory, getProductsByBrand, getFeaturedProducts, getProduct, getProductsByCategoryCount, getTotalProductsCount, getCategoryProductsCount, getSimilarProducts}
