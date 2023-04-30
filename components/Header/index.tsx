@@ -31,6 +31,7 @@ import { CarIcon, LogInIcon, MessageCircle, SearchIcon, SeparatorHorizontal, Sho
 import { Fragment } from "react";
 import { useAppSelector } from "@/store/store";
 import { totalCartItemSelector } from "@/store/features/cartSlice";
+import CartSlider from "../Cart/CartSlider";
 
 type HeaderProps = {
   categories: Database['public']['Tables']['categories']['Row'][];
@@ -121,18 +122,7 @@ const handleSearch = (e:React.FormEvent<HTMLFormElement>) => {
                 <MessageCircle />
                 <p className="text-xs">Message</p>
               </Link>
-              <Link
-                href="/cart"
-                className="flex flex-col items-center relative"
-              >
-                <ShoppingBag />
-                <p className="text-xs">Cart</p>
-                {!!totalItems && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs flex items-center justify-center rounded-full px-1">
-                    {totalItems}
-                  </span>
-                )}
-              </Link>
+              <CartSlider />
             </div>
           </div>
         </Container>
