@@ -131,14 +131,12 @@ const handleSearch = (e:React.FormEvent<HTMLFormElement>) => {
             <div className="flex items-center space-x-3">
               <Menubar>
                 <MenubarMenu>
-                  <MenubarTrigger>Sub Categories</MenubarTrigger>
+                  <MenubarTrigger>Categories</MenubarTrigger>
                   <MenubarContent>
-                    {subCategories.map((subCategory) => (
-                      <MenubarItem key={subCategory.id}>
-                        <Link
-                          href={`/categories/${subCategory.parent.slug}?sub_category=${subCategory.slug}&page=1`}
-                        >
-                          {subCategory.name}
+                    {categories.map((category) => (
+                      <MenubarItem key={category.id}>
+                        <Link href={`/categories/${category.slug}?page=1`}>
+                          {category.name}
                         </Link>
                       </MenubarItem>
                     ))}
