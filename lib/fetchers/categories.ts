@@ -40,6 +40,16 @@ const getSubCategoryBySlug = async (slug:string) => {
   return subCategories
 }
 
+const getSubCategory = async (slug:string) => {
+  const { data: subCategories, error } = await supabaseClient.from('sub_category').select('*, parent(*)').eq('slug', slug).single()
+
+    if(error) {
+      console.log(error)
+      throw Error(error.message)
+    }
+  return subCategories
+}
+
 
 export default getCategories
 export { getSubCategories, getSubCategoryBySlug, getCategory }

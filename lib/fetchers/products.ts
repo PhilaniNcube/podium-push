@@ -64,13 +64,20 @@ const getProductsByCategoryCount = async (count: number, categoryId:string) => {
 
 const getProductsBySubCategory = async (page: number, sub_category:string) => {
 
+    const {data: category, error: categoryError} = await supabaseClient.from("sub_category").select("id").eq("slug", sub_category).single()
+
+    if(categoryError) {
+      console.log(categoryError)
+      throw Error(categoryError.message)
+    }
+
   let start = (page - 1) * 15
   let end = (page * 15)
 
   console.log({sub_category})
 
   const { data: products, error } = await supabaseClient.from('products').select('*, category(*), brand(*), sub_category(*), supplier(*)')
-    .range(start, end).eq('sub_category.slug', sub_category)
+    .range(start, end).eq('sub_category', category?.id)
 
     if(error) {
       console.log(error)
@@ -130,6 +137,24 @@ const getCategoryProductsCount = async (categorySlug:string) => {
     return data.length
 }
 
+const getSubCategoryProductsCount = async (categorySlug:string) => {
+
+   const {data: category, error: categoryError} = await supabaseClient.from("sub_category").select("id").eq("slug", categorySlug).single()
+
+   if(categoryError) {
+      console.log(categoryError)
+      throw Error(categoryError.message)
+   }
+
+    const { data, error } = await supabaseClient.from('products').select('id', {count: 'exact'}).eq('sub_category', category?.id)
+
+      if(error) {
+        console.log(error)
+        throw Error(error.message)
+      }
+    return data.length
+}
+
 const getSimilarProducts = async (subCategoryId: string) => {
 
   const { data, error } = await supabaseClient.from('products').select('*, category(*), brand(*), sub_category(*), supplier(*)').eq('sub_category', subCategoryId).limit(6)
@@ -142,4 +167,4 @@ const getSimilarProducts = async (subCategoryId: string) => {
 
 }
 
-export { getProducts, getProductsByCategory, getProductsBySubCategory, getProductsByBrand, getFeaturedProducts, getProduct, getProductsByCategoryCount, getTotalProductsCount, getCategoryProductsCount, getSimilarProducts}
+export { getProducts, getProductsByCategory, getProductsBySubCategory, getProductsByBrand, getFeaturedProducts, getProduct, getProductsByCategoryCount, getTotalProductsCount, getCategoryProductsCount, getSimilarProducts, getSubCategoryProductsCount}

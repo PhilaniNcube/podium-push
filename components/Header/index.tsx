@@ -122,7 +122,15 @@ const handleSearch = (e:React.FormEvent<HTMLFormElement>) => {
                 <MessageCircle />
                 <p className="text-xs">Message</p>
               </Link>
-              <CartSlider />
+              <Link href="/cart" className="flex flex-col items-center relative">
+                <ShoppingBag />
+                <p className="text-xs">Cart</p>
+                {!!totalItems && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs flex items-center justify-center rounded-full px-1">
+                    {totalItems}
+                  </span>
+                )}
+              </Link>
             </div>
           </div>
         </Container>

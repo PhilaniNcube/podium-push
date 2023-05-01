@@ -29,7 +29,7 @@ const HomePage = ({subCategories}:BannerProps) => {
                     <Fragment key={category.id}>
                       <Link
                         className="hover:bg-slate-200 rounded text-slate-600 px-4 py-2 font-medium"
-                        href={`/products/categories/${category.parent.slug}/${category.slug}`}
+                        href={`/sub-categories/${category.slug}`}
                       >
                         {category.name}
                       </Link>

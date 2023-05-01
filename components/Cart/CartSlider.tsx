@@ -77,9 +77,8 @@ const CartSlider = () => {
           <h2 className="text-2xl">{formatter(totalPrice)}</h2>
         </span>
         <SheetFooter className="mt-5 flex flex-col">
-          <Button className="w-full">
-            <Link href="/checkout">Checkout</Link>
-          </Button>
+            <Link className="w-full bg-blue-800 text-white py-2 rounded-md font-semibold text-lg text-center" href="/checkout">Checkout</Link>
+
         </SheetFooter>
       </SheetContent>
     </Sheet>
