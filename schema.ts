@@ -170,6 +170,92 @@ export interface Database {
           product_code?: string
         }
       }
+      orders:{
+        Row: {
+          id: string
+          created_at: string
+          user_id: string | null
+          order_status: "Pending" | "Processing" | "Completed" | "Cancelled" | ""
+          payment_status: "Pending" | "Processing" | "Completed" | "Cancelled" | ""
+          payment_method:  "Card/EFT" | "Intellimali" | ""
+          payment_reference: string
+          email: string
+          phone: string
+          first_name: string
+          last_name: string
+          shipping_address: {
+            street_address: string
+            suburb: string
+            city: string
+            postal_code: string
+          }
+          shipping_cost: number
+          discount_amount: number
+          total_amount: number
+          tracking_number: string
+          notes: string
+          order_items: {
+            product: Database["public"]["Tables"]["products"]["Row"]
+            quantity: number
+          }[]
+        }
+        Insert: {
+          id: string
+          created_at?: string
+          user_id?: string | null
+          order_status?: "Pending" | "Processing" | "Completed" | "Cancelled" | ""
+          payment_status?: "Pending" | "Processing" | "Completed" | "Cancelled" | ""
+          payment_method?: "Cash on Delivery" | "Card/EFT" | "Intellimali" | ""
+          payment_reference?: string
+          email?: string
+          phone?: string
+          first_name?: string
+          last_name?: string
+          shipping_address?: {
+            street_address: string
+            suburb: string
+            city: string
+            postal_code: string
+          }
+          shipping_cost?: number
+          discount_amount?: number
+          total_amount?: number
+          tracking_number?: string
+          notes?: string
+          order_items?: {
+            product: Database["public"]["Tables"]["products"]["Row"]
+            quantity: number
+          }[]
+        }
+        Update: {
+               id: string
+          created_at?: string
+          user_id?: string | null
+          order_status?: "Pending" | "Processing" | "Completed" | "Cancelled" | ""
+          payment_status?: "Pending" | "Processing" | "Completed" | "Cancelled" | ""
+          payment_method?: "Cash on Delivery" | "Card/EFT" | "Intellimali" | ""
+          payment_reference?: string
+          email?: string
+          phone?: string
+          first_name?: string
+          last_name?: string
+          shipping_address?: {
+            street_address: string
+            suburb: string
+            city: string
+            postal_code: string
+          }
+          shipping_cost?: number
+          discount_amount?: number
+          total_amount?: number
+          tracking_number?: string
+          notes?: string
+          order_items?: {
+            product: Database["public"]["Tables"]["products"]["Row"]
+            quantity: number
+          }[]
+        }
+      }
       profiles: {
         Row: {
           id: string
