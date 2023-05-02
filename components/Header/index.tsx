@@ -27,30 +27,41 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { Database } from "@/schema";
-import { CarIcon, LogInIcon, MessageCircle, SearchIcon, SeparatorHorizontal, ShoppingBag, UserIcon, UserPlusIcon } from "lucide-react";
+import { CarIcon, LogInIcon, LogOutIcon, MessageCircle, SearchIcon, SeparatorHorizontal, ShoppingBag, UserIcon, UserPlusIcon } from "lucide-react";
 import { Fragment } from "react";
 import { useAppSelector } from "@/store/store";
 import { totalCartItemSelector } from "@/store/features/cartSlice";
 import CartSlider from "../Cart/CartSlider";
+import { Session, User } from "@supabase/supabase-js";
+import { useSupabase } from "@/app/supabase-provider";
 
 type HeaderProps = {
   categories: Database['public']['Tables']['categories']['Row'][];
   subCategories: Database['public']['Tables']['sub_category']['Row'][];
   brands: Database['public']['Tables']['brands']['Row'][];
+  user: User | null
 }
 
-const Header = ({categories, subCategories, brands}:HeaderProps) => {
+const Header = ({
+  categories,
+  subCategories,
+  brands,
+  user
 
-  const totalItems = useAppSelector(totalCartItemSelector)
+}: HeaderProps) => {
+  const totalItems = useAppSelector(totalCartItemSelector);
 
-const handleSearch = (e:React.FormEvent<HTMLFormElement>) => {
+  const {supabase} = useSupabase()
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  //get entries from Object.entries
-  const {search, category} = Object.fromEntries(new FormData(e.currentTarget));
+    //get entries from Object.entries
+    const { search, category } = Object.fromEntries(
+      new FormData(e.currentTarget)
+    );
 
-  console.log({search, category})
-}
-
+    console.log({ search, category });
+  };
 
   return (
     <Fragment>
@@ -122,7 +133,10 @@ const handleSearch = (e:React.FormEvent<HTMLFormElement>) => {
                 <MessageCircle />
                 <p className="text-xs">Message</p>
               </Link>
-              <Link href="/cart" className="flex flex-col items-center relative">
+              <Link
+                href="/cart"
+                className="flex flex-col items-center relative"
+              >
                 <ShoppingBag />
                 <p className="text-xs">Cart</p>
                 {!!totalItems && (
@@ -179,20 +193,35 @@ const handleSearch = (e:React.FormEvent<HTMLFormElement>) => {
               </Menubar>
             </div>
             <div className="flex items-center space-x-4">
-              <Link
-                href="/sign-in"
-                className="text-md text-neutral-500 px-3 py-2 hover:bg-neutral-200 rounded font-medium flex space-x-2"
-              >
-                <LogInIcon />
-                <p>Sign In</p>
-              </Link>
-              <Link
-                href="/register"
-                className="text-md text-neutral-500 px-3 py-2 hover:bg-neutral-200 rounded font-medium flex space-x-2"
-              >
-                <UserPlusIcon />
-                <p>Register</p>
-              </Link>
+              {user ? (
+                <div
+                  onClick={() => {
+                    supabase.auth.signOut();
+                  }}
+                  className="text-md text-red-500 px-3 py-2 hover:bg-neutral-200 rounded font-medium flex space-x-2"
+                >
+                  <LogOutIcon />
+                  <p>Sign Out</p>
+                </div>
+              ) : (
+                <Fragment>
+                  <Link
+                    href="/sign-in"
+                    className="text-md text-neutral-500 px-3 py-2 hover:bg-neutral-200 rounded font-medium flex space-x-2"
+                  >
+                    <LogInIcon />
+                    <p>Sign In</p>
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="text-md text-neutral-500 px-3 py-2 hover:bg-neutral-200 rounded font-medium flex space-x-2"
+                  >
+                    <UserPlusIcon />
+                    <p>Register</p>
+                  </Link>
+                </Fragment>
+              )}
+
               <Link
                 href="/shipping-and-returns"
                 className="text-md text-neutral-500 px-3 py-2 hover:bg-neutral-200 rounded font-medium flex space-x-2"
