@@ -34,6 +34,7 @@ import { totalCartItemSelector } from "@/store/features/cartSlice";
 import CartSlider from "../Cart/CartSlider";
 import { Session, User } from "@supabase/supabase-js";
 import { useSupabase } from "@/app/supabase-provider";
+import { useRouter } from "next/navigation";
 
 type HeaderProps = {
   categories: Database['public']['Tables']['categories']['Row'][];
@@ -52,6 +53,16 @@ const Header = ({
   const totalItems = useAppSelector(totalCartItemSelector);
 
   const {supabase} = useSupabase()
+  const router = useRouter()
+
+
+  const handleLogout = async () => {
+    const {error} = await supabase.auth.signOut()
+    if(error) {
+      console.log(error.message);
+      return }
+    router.push('/')
+  }
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -195,9 +206,7 @@ const Header = ({
             <div className="flex items-center space-x-4">
               {user ? (
                 <div
-                  onClick={() => {
-                    supabase.auth.signOut();
-                  }}
+                  onClick={handleLogout}
                   className="text-md text-red-500 px-3 py-2 hover:bg-neutral-200 rounded font-medium flex space-x-2"
                 >
                   <LogOutIcon />

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useSupabase } from "../supabase-provider";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 
 
@@ -20,6 +21,8 @@ type SignInSchema = z.infer<typeof signInSchema>;
 const SignIn = () => {
 
   const {supabase} = useSupabase();
+
+  const router = useRouter()
 
 
     const {
@@ -46,7 +49,14 @@ const SignIn = () => {
         console.log(error)
 
       } else {
-         console.log(error);
+
+        const {data:isAdmin, error:adminError} = await supabase.rpc("is_admin")
+
+        if(isAdmin){
+          router.push("/dashboard")
+        } else {
+          router.push("/")
+        }
 
       }
     }
