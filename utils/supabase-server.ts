@@ -4,9 +4,11 @@ import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-next
 import { cookies, headers } from 'next/headers';
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default () =>
+const supabaseServer = () =>
   createServerComponentSupabaseClient<Database>({
     headers,
     cookies,
   });
+
+export default supabaseServer;
 

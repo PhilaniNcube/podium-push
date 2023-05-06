@@ -3,11 +3,11 @@ import supabaseClient from "../supabase-client"
 //create a function to return products from supabase with pagination return 16 products per page
 const getProducts = async (page=1) => {
 
-  let start = (page - 1) * 16
-  let end = (page * 16) - 1
+  let start = (page - 1) * 15
+  let end = (start + 15)
 
   const { data: products, error } = await supabaseClient.from('products').select('*, category(*), brand(*), sub_category(*), supplier(*)')
-    .limit(16).range(start, end)
+    .range(start, end)
 
     if(error) {
       console.log(error)
@@ -121,7 +121,7 @@ const getTotalProductsCount = async () => {
         console.log(error)
         throw Error(error.message)
       }
-    return data
+    return data.length
 }
 
 const getCategoryProductsCount = async (categorySlug:string) => {
