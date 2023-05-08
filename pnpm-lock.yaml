@@ -16,6 +16,7 @@ specifiers:
   '@radix-ui/react-scroll-area': ^1.0.3
   '@radix-ui/react-select': ^1.2.1
   '@radix-ui/react-separator': ^1.0.2
+  '@radix-ui/react-switch': ^1.0.2
   '@radix-ui/react-toast': ^1.1.3
   '@redux-devtools/extension': ^3.2.5
   '@reduxjs/toolkit': ^1.9.4
@@ -79,6 +80,7 @@ dependencies:
   '@radix-ui/react-scroll-area': 1.0.3_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-select': 1.2.1_jf7puk66b2eiqxne3oe3xlxkou
   '@radix-ui/react-separator': 1.0.2_biqbaboplfbrettd7655fr4n2y
+  '@radix-ui/react-switch': 1.0.2_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-toast': 1.1.3_biqbaboplfbrettd7655fr4n2y
   '@redux-devtools/extension': 3.2.5_redux@4.2.1
   '@reduxjs/toolkit': 1.9.4_k4ae6lp43ej6mezo3ztvx6pykq
@@ -880,6 +882,24 @@ packages:
       '@babel/runtime': 7.21.0
       '@radix-ui/react-compose-refs': 1.0.0_react@18.2.0
       react: 18.2.0
+    dev: false
+
+  /@radix-ui/react-switch/1.0.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-BcG/LKehxt36NXG0wPnoCitIfSMtU9Xo7BmythYA1PAMLtsMvW7kALfBzmduQoHTWcKr0AVcFyh0gChBUp9TiQ==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.21.0
+      '@radix-ui/primitive': 1.0.0
+      '@radix-ui/react-compose-refs': 1.0.0_react@18.2.0
+      '@radix-ui/react-context': 1.0.0_react@18.2.0
+      '@radix-ui/react-primitive': 1.0.2_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-use-controllable-state': 1.0.0_react@18.2.0
+      '@radix-ui/react-use-previous': 1.0.0_react@18.2.0
+      '@radix-ui/react-use-size': 1.0.0_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@radix-ui/react-toast/1.1.3_biqbaboplfbrettd7655fr4n2y:
