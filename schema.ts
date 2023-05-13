@@ -126,7 +126,10 @@ export interface Database {
         Insert: {
           brand?: string
           category?: string
-          details?: Json
+          details?: {
+            key: string
+            value: string
+          }[]
           sub_category?: string
           images?: ImageType[]
           supplier?: string
